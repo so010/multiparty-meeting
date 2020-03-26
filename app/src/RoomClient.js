@@ -1149,8 +1149,8 @@ export default class RoomClient
 			logger.debug(
 				'changeWebcam() | new selected webcam [device:%o]',
 				device);
-			if (this._webcamProducer && this._webcamProducer.track)
-				this._webcamProducer.track.stop();
+
+			this._webcamProducer.track.stop();
 
 			logger.debug('changeWebcam() | calling getUserMedia()');
 
@@ -1162,21 +1162,14 @@ export default class RoomClient
 						...VIDEO_CONSTRAINS[resolution]
 					}
 				});
-			if (stream){
-				const track = stream.getVideoTracks()[0];
-				if (track) {
-					await this._webcamProducer.replaceTrack({ track });
-	
-					store.dispatch(
-						producerActions.setProducerTrack(this._webcamProducer.id, track));
-							
-				} else {
-					logger.warn('getVideoTracks Error: First Video Track is null')
-				}
-	
-			} else {
-				logger.warn ('getUserMedia Error: Stream is null!') 
-			}
+
+			const track = stream.getVideoTracks()[0];
+
+			await this._webcamProducer.replaceTrack({ track });
+
+			store.dispatch(
+				producerActions.setProducerTrack(this._webcamProducer.id, track));
+
 			store.dispatch(settingsActions.setSelectedWebcamDevice(deviceId));
 
 			await this._updateWebcams();
