@@ -91,9 +91,3 @@ export const setDisplayNameInProgress = (flag) =>
 		type    : 'SET_DISPLAY_NAME_IN_PROGRESS',
 		payload : { flag }
 	});
-
-	export const setIsSpeaking = (flag) =>
-	({
-		type    : 'SET_IS_SPEAKING',
-		payload : { flag }
-	});

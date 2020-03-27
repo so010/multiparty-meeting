@@ -19,8 +19,7 @@ const initialState =
 	loginEnabled          : false,
 	raiseHand             : false,
 	raiseHandInProgress   : false,
-	loggedIn              : false,
-	isSpeaking            : false
+	loggedIn              : false
 };
 
 const me = (state = initialState, action) =>
@@ -146,13 +145,6 @@ const me = (state = initialState, action) =>
 			const { flag } = action.payload;
 
 			return { ...state, displayNameInProgress: flag };
-		}
-
-		case 'SET_IS_SPEAKING':
-		{
-			const { flag } = action.payload;
-
-			return { ...state, isSpeaking: flag };
 		}
 
 		default:
